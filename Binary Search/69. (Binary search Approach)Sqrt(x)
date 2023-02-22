@@ -26,3 +26,6 @@ public:
         return ans;
     }
 };
+//if we want to find the decimal part also then just use brute force
+//use loop and add 0.1 to ans , and then check a if its square is less than x if Yes then save it in answer , else break the loop
+//do same as above but add 0.01 
