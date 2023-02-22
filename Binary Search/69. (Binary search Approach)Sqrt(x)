@@ -29,3 +29,17 @@ public:
 //if we want to find the decimal part also then just use brute force
 //use loop and add 0.1 to ans , and then check a if its square is less than x if Yes then save it in answer , else break the loop
 //do same as above but add 0.01 
+
+double moreprecise(int n, int prescision , int temsol){
+    double factor =1;
+    double ans=tempsol;
+    
+    for(double i=0;i<precision;i++){
+        factor = factor/10;
+        
+        for(int j=ans;j*j<n;j=j+factor){
+            ans=j;
+        }
+    }
+    return ans;
+}
