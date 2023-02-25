@@ -1,0 +1,45 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& p) {
+        int curr_min=INT_MAX,curr_max=INT_MIN,flag=0,m_pos,min_pos;
+        int ans=0;
+        for(int i=0;i<p.size();i++){
+            if(p[i]<curr_min){
+                curr_min=p[i];
+                curr_max=0;
+                // min_pos=i;
+            }
+            if(p[i]>curr_max){
+                curr_max=p[i];
+                // m_pos=i;
+            }
+            // if(min_pos<m_pos){
+            ans=max(ans,curr_max-curr_min);
+            // flag=1;
+            // }
+        }
+        // if(flag==0){
+        //     return 0;
+        // }
+        // else{
+        return ans;
+        // }
+        //TLE solution
+        // int curr_min,curr_max=0,flag=0;
+        // for(int i=0;i<p.size()-1;i++){
+        //     if(p[i]<p[i+1]){
+        //         curr_min=p[i];
+        //         for(int j=i+1;j<p.size();j++){
+        //             curr_max=max(curr_max,p[j]-curr_min);
+        //         }
+        //         flag=1;
+        //     }
+        // }
+        // if(flag==0){
+        //     return 0;
+        // }
+        // else{
+        // return curr_max;
+        // }
+    }
+};
