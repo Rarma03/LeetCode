@@ -22,3 +22,27 @@ public:
         return v;
     }
 };
+//or a little bit different 
+class Solution {
+public:
+    string getSubTreeDuplicate(TreeNode* root,unordered_map<string,int>& m,vector<TreeNode*>& v){
+        string s;
+        if(root==NULL){
+            return "N";
+        }
+        s = to_string(root->val)+","+getSubTreeDuplicate(root->left,m,v)+","+getSubTreeDuplicate(root->right,m,v);
+        m[s]++;
+        if(m[s]==2){
+            v.push_back(root);
+        }        
+        return s;
+    }
+    vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
+        unordered_map<string,int> m;
+        vector<TreeNode*> v;
+        
+        getSubTreeDuplicate(root,m,v);
+
+        return v;
+    }
+};
