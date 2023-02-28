@@ -22,7 +22,7 @@ int traverse_memoisation(vector<int>& nums,int n ,vector<int>& dp){
 }
 int traverse_tabulation(vector<int>& nums){
     int n=nums.size();
-    vector<int> dp(n,0);
+    vector<int> dp(n+1,-1);
 
     dp[0]=nums[0];
 
