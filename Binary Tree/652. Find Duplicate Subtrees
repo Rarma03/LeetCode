@@ -1,0 +1,24 @@
+ //Learn to convert the tree into a string 
+class Solution {
+public:
+    string getSubTreeDuplicate(TreeNode* root,unordered_map<string,int>& m,vector<TreeNode*>& v){
+        string s;
+        if(root==NULL){
+            return "N";
+        }
+        s = to_string(root->val)+","+getSubTreeDuplicate(root->left,m,v)+","+getSubTreeDuplicate(root->right,m,v);
+        if(m[s]==1){
+            v.push_back(root);
+        }        
+        m[s]++;
+        return s;
+    }
+    vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
+        unordered_map<string,int> m;
+        vector<TreeNode*> v;
+        
+        getSubTreeDuplicate(root,m,v);
+
+        return v;
+    }
+};
