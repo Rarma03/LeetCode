@@ -1,0 +1,36 @@
+//Using Map
+class Solution {
+public:
+    unordered_map<int,int> prev;
+    int fib(int n) {
+        if(n<2){
+            return min(n,1);
+        }
+        if(prev.find(n)){return prev[n];}
+        prev[n] = fib(n-1)+fib(n-2);
+        return prev[n];
+    }
+};
+//Using DP
+//Not valid on leetcode but is right
+class Solution {
+public:
+    int find_fib(int n,vector<int>& dp){
+        if(n<2){
+            return dp[n];
+        }
+        // return fib(n-1)+fib(n-2);
+        if(dp[n] != -1){
+            return dp[n];
+        }
+        dp[n]=find_fib(n-1,dp)+find_fib(n-2,dp);        
+        return dp[n];
+    }
+    int fib(int n) {
+        vector<int> dp(n+1,-1);
+        dp[0]=0;
+        dp[1]=1;
+        return find_fib(n,dp);        
+    }
+};
+//Valid and fast
