@@ -1,0 +1,66 @@
+solution first by MERGE SORT : T.C - O(nlogn)-worst/average , S.C - O(n)
+class Solution {
+public:
+    void mergesort(vector<int>& nums,int l,int r){
+        if(l>=r){
+            return ;
+        }
+        int mid = l + (r-l)/2;
+
+    //left break
+        mergesort(nums,l,mid);
+
+    //right break
+        mergesort(nums,mid+1,r);
+    //merge
+        merge(nums,l,r);
+
+    }
+    void merge(vector<int>& nums,int l,int r){
+    //merging the elements or array
+        int mid = l + (r-l)/2;
+
+        int len1=mid-l+1;
+        int len2=r-mid;
+
+        //creating dynamic array
+        int *first = new int[len1];
+        int *second = new int[len2];
+
+        //copying the value
+        int mainArrayIndex=l;
+        for(int i=0;i<len1;i++){
+            first[i]=nums[mainArrayIndex++];
+        }
+        mainArrayIndex=mid+1;
+        for(int i=0;i<len2;i++){
+            second[i]=nums[mainArrayIndex++];            
+        }
+        
+        //merging
+        int index1=0,index2=0;
+        mainArrayIndex=l;
+        while(index1<len1 && index2<len2){
+            if(first[index1]<second[index2]){
+                nums[mainArrayIndex++]=first[index1++];
+            }
+            else{
+                nums[mainArrayIndex++]=second[index2++];
+            }
+        }
+        while(index1<len1){
+            nums[mainArrayIndex++]=first[index1++];
+        }
+        while(index2<len2){
+            nums[mainArrayIndex++]=second[index2++];
+        }
+        //to overcome memory leakage
+        delete[]first;
+        delete[]second;
+    }
+    
+    vector<int> sortArray(vector<int>& nums) {
+        mergesort(nums,0,nums.size()-1);
+        return nums;
+    }
+};
