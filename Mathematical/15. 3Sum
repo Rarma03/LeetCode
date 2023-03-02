@@ -1,0 +1,35 @@
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& n) {
+        vector<vector<int>> v;
+        vector<int> a;
+        set<vector<int>> s;
+
+        sort(n.begin(),n.end());
+        for(int i=0;i<n.size()-2;i++){
+            int ini=i+1,j=n.size()-1;
+            int target = 0 - n[i];
+            while(ini<j){
+                if((n[ini]+n[j])==target){
+                    a.push_back(n[i]);
+                    a.push_back(n[ini]);
+                    a.push_back(n[j]);
+                    s.insert(a);
+                    a.clear();
+                    j--;
+                    ini++;
+                }
+                else if((n[ini]+n[j])>target){
+                    j--;
+                }
+                else{
+                    ini++;
+                }                
+            }
+        }
+        for(auto val:s){
+            v.push_back(val);
+        }
+        return v;
+    }
+};
