@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int> leftRigthDifference(vector<int>& n) {
+        vector<int> v;
+        int h=n.size();
+        int *ls=new int[h];
+        int *rs=new int[h];
+
+        ls[0]=0;
+        rs[n.size()-1]=0;
+        for(int i=1;i<n.size();i++){
+            ls[i]=ls[i-1]+n[i-1];
+        }
+        for(int i=(n.size()-2);i>=0;i--){
+            rs[i]=rs[i+1]+n[i+1];
+        }
+        for(int i=0;i<n.size();i++){
+            v.push_back(abs(ls[i]-rs[i]));
+        }
+        delete[] ls;
+        delete[] rs;
+        return v;
+    }
+};
