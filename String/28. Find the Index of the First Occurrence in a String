@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int strStr(string h, string s) {
+        int a=INT_MAX,j=0;
+        for(int i=0;i<h.size();i++){
+            if(h[i]==s[j]){
+                a=min(a,i);
+                j++;
+                if(j==s.size()){return a;}
+            }
+            else{
+                i=i-j;
+                j=0;
+                a=INT_MAX;
+            }
+        }
+        return -1;
+    }
+};
