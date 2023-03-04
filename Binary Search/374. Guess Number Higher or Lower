@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int guessNumber(int n) {
+        int l=0,r=n;
+        int target=n/2;
+
+        while(l<=r){
+            int mid = l + (r-l)/2;
+            int curr = guess(mid);
+            if(curr==0){
+                return mid;
+            }
+            else if(curr == 1){
+                l=mid+1;
+            }
+            else{
+                r=mid-1;
+            }
+        }
+        return 0;
+    }
+};
