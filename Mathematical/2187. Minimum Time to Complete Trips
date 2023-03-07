@@ -14,6 +14,7 @@ public:
         while(true){
             cur_t++;
             for(auto val : v){
+                if(val.first>cur_t || ttrips<=0){break;} // this make it more optimize than before but still cant cross TLE
                 if(cur_t%val.first==0 || val.first==cur_t){
                     // cout<<cur_t<<"%"<<val.first<<"="<<val.first%cur_t<<"\n";
                     val.second++;
@@ -26,3 +27,4 @@ public:
     }
 };
 //optimiszing it
+it is an binary search question refer binary search folder
