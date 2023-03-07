@@ -1,0 +1,28 @@
+//TLE logic
+#define ll long long
+class Solution {
+public:
+    long long minimumTime(vector<int>& time, int ttrips) {
+        vector<pair<ll,ll>> v;
+        pair<ll,ll> p;
+
+        for(auto val:time){
+            p={val,0};
+            v.push_back(p);
+        }
+        ll cur_t=0;
+        while(true){
+            cur_t++;
+            for(auto val : v){
+                if(cur_t%val.first==0 || val.first==cur_t){
+                    // cout<<cur_t<<"%"<<val.first<<"="<<val.first%cur_t<<"\n";
+                    val.second++;
+                    ttrips--;
+                }
+            }
+            if(ttrips<=0){break;}
+        }
+        return cur_t;
+    }
+};
+//optimiszing it
