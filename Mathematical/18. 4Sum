@@ -1,0 +1,48 @@
+#define ll long long
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& n, int target) {
+        vector<vector<int>> v;
+        vector<int> a;
+        if(n.size()<3){
+            return v;
+        }
+
+        sort(n.begin(),n.end());
+
+        for(int i=0;i<n.size()-3;i++){
+            ll first=target-n[i];
+            for(int j=n.size()-1;j>i;j--){
+                ll second=first-n[j];
+                int l=i+1,r=j-1;
+                while(l<r){
+                    if(n[l]+n[r]==second){
+                        a.push_back(n[i]);
+                        a.push_back(n[l]);
+                        a.push_back(n[r]);
+                        a.push_back(n[j]);
+                        v.push_back(a);
+                        a.clear();
+                        l++;
+                        r--;
+                    }
+                    else if(n[l]+n[r]<second){
+                        l++;
+                    }
+                    else{
+                        r--;
+                    }
+                }
+            }
+        }
+        set<vector<int>> s;
+        for(auto val:v){
+            s.insert(val);            
+        }
+        v.clear();
+        for(auto val:s){
+            v.push_back(val);
+        }
+        return v;
+    }
+};
