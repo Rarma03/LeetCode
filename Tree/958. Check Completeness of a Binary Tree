@@ -1,0 +1,56 @@
+//not working code on 50% cases
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    // bool check(TreeNode* l,TreeNode* r){
+    //     if(l!=NULL and r!=NULL){
+    //         return true;
+    //     }
+    //     if(l!=NULL and r==NULL){
+    //         return true;
+    //     }
+    //     if(l==NULL and r!=NULL){
+    //         return false;
+    //     }
+    //     if(!l and !r){
+    //         return false;
+    //     }
+    //     // if(l==NULL and r==NULL){
+    //     //     return true;
+    //     // }
+    //     bool f=check(l->left,r->left);
+    //     bool g=check(l->right,r->right);
+    //     cout<<(bool)f<<(bool)g<<endl;
+    //     return (f and g);
+    // }
+    bool solve(TreeNode *root){
+        if(!root){
+            return true;
+        }
+        if(root->right!=NULL and root->left==NULL){
+            return false;
+        }
+        bool l=solve(root->left);
+        bool r=solve(root->right);
+        cout<<l<<r<<endl;
+        return (l and r);
+    }
+    bool isCompleteTree(TreeNode* root) {
+        bool i= solve(root);
+        bool j= check(root->left,root->right);        
+        return (i and j);
+    }
+};
+//using level order
+
+//using dfs or bfs
