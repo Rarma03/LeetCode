@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool canPlaceFlowers(vector<int>& f, int n) {
+        if(f.size()==1){
+            if(f[0]==0){n--;}
+        }
+        int count=0;
+        for(int i=0;i<f.size();i++){
+            if(f[i] == 0){
+                count++;
+            }
+            else{
+                n -= (int)count/2;
+                count = -1;
+                if(n<=0){return true;}
+            }
+        }
+        if(count != -1){
+            count++;
+            n-=count/2;
+        }
+        if(n<=0){return true;}
+        return false;
+    }
+};
