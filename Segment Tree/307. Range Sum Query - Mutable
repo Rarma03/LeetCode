@@ -1,0 +1,94 @@
+class NumArray {
+public:
+int *tree=new int[1],n;
+void buildTree(int *tree, int index,vector<int>& a, int s, int e)
+{
+    // base conditions
+    if (s > e)
+    {
+        return;
+    }
+    if (s == e)
+    {
+        tree[index] = a[s];
+        return;
+    }
+
+    int mid = s + (e - s) / 2;
+    buildTree(tree, 2 * index, a, s, mid);
+    buildTree(tree, 2 * index + 1, a, mid + 1, e);
+
+    int left = tree[2 * index];
+    int right = tree[2 * index + 1];
+
+    tree[index] = left + right;
+}
+
+int query(int *tree, int index, int s, int e, int x, int y)
+{
+    // no overlap
+    if (x > e || y < s)
+    {
+        return 0;
+    }
+    // complete overlap
+    if (s >= x and e <= y)
+    {
+        return tree[index];
+    }
+    // partial
+    int mid = s + (e - s) / 2;
+    int left = query(tree, 2 * index, s, mid, x, y);
+    int right = query(tree, 2 * index + 1, mid + 1, e, x, y);
+
+    return (left + right);
+}
+void updateNode(int* tree, int index, int s, int e, int pos, int val)
+{
+    // no overlap
+    if (pos < s || pos > e)
+    {
+        return;
+    }
+
+    // completely overlap
+    if (e == s)
+    {
+        tree[index] = val;
+        return;
+    }
+
+    // partially overlap
+    int mid = s + (e - s) / 2;
+    updateNode(tree, 2 * index, s, mid, pos, val);
+    updateNode(tree, 2 * index + 1, mid + 1, e, pos, val);
+
+    int left = tree[2 * index];
+    int right = tree[2 * index + 1];
+
+    tree[index] = (left + right);
+}
+        
+    NumArray(vector<int>& nums) {
+        n=nums.size();
+        delete[] tree;
+        tree = new int[4*n+1];
+        buildTree(tree, 1, nums, 0, n - 1);
+    }
+    
+    void update(int index, int val) {
+
+        updateNode(tree, 1, 0, n - 1, index,val);
+    }
+    
+    int sumRange(int left, int right) {
+        return query(tree, 1, 0, n - 1, left,right);
+    }
+};
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray* obj = new NumArray(nums);
+ * obj->update(index,val);
+ * int param_2 = obj->sumRange(left,right);
+ */
