@@ -40,3 +40,24 @@ public:
         return traverse_tabulation(nums);
     }
 };
+//alternate best solution
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+    int n=nums.size();
+
+    int prev1 = 0;
+    int prev = nums[0];
+    int ans=max(prev1,prev);
+
+    for(int i=1;i<n;i++){
+        int include = prev1 + nums[i];
+        int exclude = prev + 0;
+        ans = max(include,exclude);
+        prev1 = prev;
+        prev = ans;
+    }
+    return ans;
+    }
+};
